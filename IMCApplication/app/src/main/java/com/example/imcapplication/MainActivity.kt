@@ -1,7 +1,10 @@
 package com.example.imcapplication
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
@@ -15,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private var isFemaleSelected: Boolean = false
     private var currentWeight: Int = 70
     private var currentAge: Int = 50
+    private var currentHeight: Int = 100
 
     private lateinit var maleView: CardView
     private lateinit var femaleView: CardView
@@ -26,6 +30,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnRestarEdad: FloatingActionButton
     private lateinit var btnAñadirEdad: FloatingActionButton
     private lateinit var tvEdad: TextView
+    private lateinit var btnCalculate: Button
+
+    companion object {
+        const val IMC_KEY = "IMC_RESULT"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +63,8 @@ class MainActivity : AppCompatActivity() {
 //            val df = DecimalFormat("#.##")
 //            val result = df.format(value)
 //            tvHeight.text = result.toString()
-            tvHeight.text = "${value.toInt()} cm"
+            currentHeight = value.toInt()
+            tvHeight.text = "$currentHeight cm"
 
         }
 
@@ -76,6 +86,24 @@ class MainActivity : AppCompatActivity() {
             setAge()
         }
 
+        btnCalculate.setOnClickListener {
+            val result = calculateIMC()
+            navigateToResult(result)
+        }
+
+    }
+
+    private fun navigateToResult(result: Double) {
+        val intent = Intent(this, IMCResultActivity::class.java)
+        intent.putExtra(IMC_KEY, result)
+        startActivity(intent)
+    }
+
+    private fun calculateIMC(): Double {
+        val df = DecimalFormat("#.##")
+        val imc = currentWeight / (currentHeight.toDouble() / 100 * currentHeight.toDouble() / 100)
+        return df.format(imc).toDouble()
+
     }
 
     private fun setAge() {
@@ -91,13 +119,13 @@ class MainActivity : AppCompatActivity() {
         femaleView = findViewById(R.id.viewFemale)
         tvHeight = findViewById(R.id.tvHeihgt)
         rsHeight = findViewById(R.id.rsHeight)
-        btnRestarPeso = findViewById(R.id.btnRestarPeso)
-        btnAñadirPeso = findViewById(R.id.btnAñadirPeso)
+        btnRestarPeso = findViewById(R.id.btnSubtractWeight)
+        btnAñadirPeso = findViewById(R.id.btnAddWeight)
         tvPeso = findViewById(R.id.tvPeso)
-        btnRestarEdad = findViewById(R.id.btnRestarEdad)
-        btnAñadirEdad = findViewById(R.id.btnAñadirEdad)
+        btnRestarEdad = findViewById(R.id.btnSubtractAge)
+        btnAñadirEdad = findViewById(R.id.btnAddAge)
         tvEdad = findViewById(R.id.tvEdad)
-
+        btnCalculate = findViewById(R.id.btnCalculate)
     }
 
     private fun changeSelectedGenderColor() {
