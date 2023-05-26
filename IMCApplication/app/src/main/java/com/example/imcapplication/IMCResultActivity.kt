@@ -1,9 +1,9 @@
 package com.example.imcapplication
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.imcapplication.MainActivity.Companion.IMC_KEY
 
@@ -13,6 +13,8 @@ class IMCResultActivity : AppCompatActivity() {
     private lateinit var tvIMC: TextView
     private lateinit var tvDescription: TextView
     private lateinit var btnRecalculate: Button
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_imcresult)
@@ -25,6 +27,7 @@ class IMCResultActivity : AppCompatActivity() {
 
     private fun initListeners() {
         btnRecalculate.setOnClickListener { onBackPressed() }
+
     }
 
     private fun initUI(result: Double) {
@@ -39,7 +42,7 @@ class IMCResultActivity : AppCompatActivity() {
             in 18.51..24.99 -> {
                 tvResult.text = getString(R.string.normal_weight)
                 tvResult.setTextColor(ContextCompat.getColor(this, R.color.normal_weight))
-                tvDescription. text = getString(R.string.normal_weigt_description)
+                tvDescription.text = getString(R.string.normal_weigt_description)
             }
 
             in 25.00..29.99 -> {
@@ -70,3 +73,5 @@ class IMCResultActivity : AppCompatActivity() {
         btnRecalculate = findViewById(R.id.btnRecalculate)
     }
 }
+
+
