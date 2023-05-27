@@ -1,5 +1,6 @@
 package com.example.imcapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -25,8 +26,15 @@ class IMCResultActivity : AppCompatActivity() {
         initListeners()
     }
 
+    private fun navigateToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
     private fun initListeners() {
-        btnRecalculate.setOnClickListener { onBackPressed() }
+//        btnRecalculate.setOnClickListener { onBackPressed() }
+//        Because of the deprecation of onBackPressed() I use here navigateToMainActivity()
+        btnRecalculate.setOnClickListener { navigateToMainActivity() }
 
     }
 
