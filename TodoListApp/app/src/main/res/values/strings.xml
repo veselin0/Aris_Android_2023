@@ -3,4 +3,5 @@
     
     <string name="title">Welcome, Gocho!</string>
     <string name="categories">categories</string>
+    <string name="tasks">tasks</string>
 </resources>
