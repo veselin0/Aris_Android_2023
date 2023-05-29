@@ -4,4 +4,6 @@
     <string name="title">Welcome, Gocho!</string>
     <string name="categories">categories</string>
     <string name="tasks">tasks</string>
+    <string name="add_task">Add Task</string>
+    <string name="business">Business</string>
 </resources>
